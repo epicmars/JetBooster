@@ -44,8 +44,8 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation project(':core')
-    kapt project(':compiler')
+    implementation project(':jetbooster')
+    kapt project(':jetbooster-compiler')
 
     // layoutbinder
     implementation 'com.androidpi:layoutbinder:1.2.0'

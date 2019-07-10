@@ -131,23 +131,20 @@ def pomConfig = {
 publishing {
     publications {
         Production(MavenPublication) {
-//            artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
-//            artifact sourcesJar
-//            artifact javadocJar
 
-            groupId GROUP
             artifactId project.name
             version VERSION
+            groupId GROUP
 
             pom {
-                packaging = project.ext.pomPackaging
+                packaging = POM_PACKAGING
             }
 
             pom.withXml {
                 def root = asNode()
-                root.appendNode('name', project.ext.projectName)
-                root.appendNode('description', project.ext.projectDescription)
-                root.appendNode('url', project.ext.projectUrl)
+                root.appendNode('name', POM_NAME)
+                root.appendNode('description', POM_DESCRIPTION)
+                root.appendNode('url', POM_URL)
                 def dependenciesNode = root.appendNode('dependencies')
                 // Iterate over the implementation dependencies (we don't want the test ones), adding a <dependency> node for each
                 configurations.implementation.allDependencies.each {
@@ -179,7 +176,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = "${GROUP}:${project.name}"
-        desc = project.ext.projectDescription
+        desc = POM_DESCRIPTION
         publicDownloadNumbers = false
         licenses = ['Apache-2.0']
         vcsUrl = VCS_URL
@@ -189,7 +186,7 @@ bintray {
 
         version {
             name = VERSION
-            desc = "${project.ext.projectName} ${VERSION}"
+            desc = "${POM_NAME} ${VERSION}"
             released = new Date()
             vcsTag = VERSION
 
